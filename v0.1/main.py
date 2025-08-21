@@ -7,7 +7,7 @@ command = ""
 shellcommands = ["help", "default-help", "random"]
 
 def runcommand():
-    command = input("\nshell.py 0.1> ")
+    command = input("\n> ")
     isnotexit(command)
     try:
         if command.lower() in shellcommands:
