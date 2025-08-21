@@ -2,16 +2,17 @@ from subprocess import run as subprocess_run
 import help_utility
 from random_utility import random_utility_main
 from install_utility import install_utility_main
+from update_utility import update_utility_main
 
 command = ""
 
-shellcommands = ["help", "default-help", "echo", "random", "install"]
+shellcommands = ["help", "default-help", "echo", "random", "install", "update", "upgrade"]
 
 def echo(string):
     print(string)
 
 def runcommand():
-    command_lst = input("\nshell.py 0.2> ").split(", ")
+    command_lst = input("\nshell.py 1.1> ").split(", ")
     for i in range(0, len(command_lst)):
         command = command_lst[i]
         isnotexit(command)
@@ -43,9 +44,11 @@ def runshellcommand(command):
         random_utility_main()
     elif "install" in command.lower():
         install_utility_main(command)
+    elif "update" in command.lower() or "upgrade" in command.lower():
+        update_utility_main(command)
 
 def main():
-    print("Basic shell in Python.\nVersion 0.2")
+    print("Basic shell in Python. Version 1.1")
     runcommand()
 
 main()

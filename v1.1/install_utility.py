@@ -18,7 +18,7 @@ def install_pip_module(target):
         print(f"Installing {target}...")
         subprocess_run(f"pip install {target}") 
 
-def install_winget_app_list(sure):
+def install_winget_apps_list(sure):
     if "y" in sure:
         print("Installing 7zip, Microsoft Edit, Microsoft Powershell, Notepad++, Bulk Rename Utility, XnView MP and VLC media player...")
         subprocess_run("winget install 7zip.7zip Microsoft.Edit Microsoft.Powershell Notepad++.Notepad++ TGRMNSoftware.BulkRenameUtility XnSoft.XnViewMP VideoLAN.VLC")
@@ -26,7 +26,7 @@ def install_winget_app_list(sure):
         wait()
     else:
         sure= input("Please input [Y]es or [N]o.\t") 
-        install_winget_app_list(sure)
+        install_winget_apps_list(sure)
 
 def install_winget_app(target):
         print(f"Installing {target}...")
@@ -64,4 +64,4 @@ def install_utility_main(command):
             print(command)
             subprocess_run(command)
         except FileNotFoundError:
-            print(f"Error: Your system does not recognize the command ('{command}') you tried to run.")
+            print(f"Error: Your system does not recognize the command you tried to run (' {command} ').")
