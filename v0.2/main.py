@@ -42,8 +42,8 @@ def runshellcommand(command):
         install_utility_main(command)
 
 def main():
-    print("Basic shell in Python, works fully only in Windows.\nVersion 0.2")
-    #Version 0.2: the shell now allows you to install python modules and winget apps through it.
+    print("Basic shell in Python.\nVersion 0.2")
+    #Version 0.2: the shell now allows you to install python modules and winget or apt apps through it.
     runcommand()
 
 main()

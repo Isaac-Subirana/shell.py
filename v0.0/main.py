@@ -20,7 +20,7 @@ def isnotexit(command):
 
 
 def main():
-    print("Basic shell in Python, designed for all Operating Systems.\nVersion 0.0")
+    print("Basic shell in Python.\nVersion 0.0")
     #It's version 0.0 because it does nothing on its own and just calls the system shell for all commands.
     run()
 

@@ -10,7 +10,7 @@ def install_pip_modules_list(sure):
         wait()
     else:
         sure= input("Please input [Y]es or [N]o.\t") 
-        install_winget_modules_list(sure)
+        install_pip_modules_list(sure)
 
 def install_pip_module(target):
         print("Updating pip...")
@@ -18,7 +18,7 @@ def install_pip_module(target):
         print(f"Installing {target}...")
         subprocess_run(f"pip install {target}") 
 
-def install_winget_modules_list(sure):
+def install_winget_app_list(sure):
     if "y" in sure:
         print("Installing 7zip, Microsoft Edit, Microsoft Powershell, Notepad++, Bulk Rename Utility, XnView MP and VLC media player...")
         subprocess_run("winget install 7zip.7zip Microsoft.Edit Microsoft.Powershell Notepad++.Notepad++ TGRMNSoftware.BulkRenameUtility XnSoft.XnViewMP VideoLAN.VLC")
@@ -26,11 +26,15 @@ def install_winget_modules_list(sure):
         wait()
     else:
         sure= input("Please input [Y]es or [N]o.\t") 
-        install_winget_modules_list(sure)
+        install_winget_app_list(sure)
 
-def install_winget_module(target):
+def install_winget_app(target):
         print(f"Installing {target}...")
         subprocess_run(f"winget install {target}") 
+
+def install_apt_app(target):
+        print(f"Installing {target}...")
+        subprocess_run(f"sudo apt install {target}") 
 
 def wait():
     input("\n---------- Press ENTER to go back to the shell ----------")
@@ -49,9 +53,11 @@ def install_utility_main(command):
         sure = input("You have chosen to install a bunch of winget-available apps that the editor recommends. These are:" \
         "\n7zip, Microsoft Edit, Microsoft Powershell, Notepad++, Bulk Rename Utility, XnViewMP and VLC media player." \
         "\n\n Are you sure you want to continue (Y/N)?\n >_ ").lower()
-        install_winget_modules_list(sure)
+        install_winget_apps_list(sure)
     elif c[0].lower() == "install" and c[1].lower() == "winget":
-        install_winget_module((" ").join(c[2:]))
+        install_winget_app((" ").join(c[2:]))
+    elif c[0].lower() == "install" and (c[1].lower() == "apt" or c[1].lower() == "apt-get"):
+        install_apt_app((" ").join(c[2:]))
     
     else: 
         try: 
