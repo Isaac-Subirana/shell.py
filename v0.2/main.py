@@ -5,7 +5,10 @@ from install_utility import install_utility_main
 
 command = ""
 
-shellcommands = ["help", "default-help", "random", "install"]
+shellcommands = ["help", "default-help", "echo", "random", "install"]
+
+def echo(string):
+    print(string)
 
 def runcommand():
     command_lst = input("\nshell.py 0.2> ").split(", ")
@@ -13,16 +16,14 @@ def runcommand():
         command = command_lst[i]
         isnotexit(command)
         try:
-            for i in shellcommands:
-                if i in command.lower():
+            for cmd in shellcommands:
+                if cmd in command.lower():
                     runshellcommand(command)
-                    runcommand()
+                    break
             else: 
-                print(command)
                 subprocess_run(command)
-                runcommand()
         except FileNotFoundError:
-            print(f"Error: Your system does not recognize the command ('{command}') you tried to run.")
+            print(f"Error: Your system does not recognize the command you tried to run (' {command} ').")
     runcommand()
     
 
@@ -32,18 +33,19 @@ def isnotexit(command):
         exit()
  
 def runshellcommand(command):
-    if command == "help":
+    if command.lower() == "help":
         help_utility.help_utility_main()
-    elif command == "default-help":
+    elif command.lower() == "default-help":
         subprocess_run("help")
-    elif command == "random":
+    elif "echo" == command[:4].lower():
+        echo(command[5:])
+    elif command.lower() == "random":
         random_utility_main()
-    elif "install" in command:
+    elif "install" in command.lower():
         install_utility_main(command)
 
 def main():
     print("Basic shell in Python.\nVersion 0.2")
-    #Version 0.2: the shell now allows you to install python modules and winget or apt apps through it.
     runcommand()
 
 main()

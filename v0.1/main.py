@@ -36,7 +36,6 @@ def runshellcommand(command):
 
 def main():
     print("Basic shell in Python.\nVersion 0.1")
-    #Version 0.1: the shell now has help, aliases for "exit" and a utility to generate random things.
     runcommand()
 
 main()
