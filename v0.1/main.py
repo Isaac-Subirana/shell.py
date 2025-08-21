@@ -35,7 +35,7 @@ def runshellcommand(command):
         random_utility_main()
 
 def main():
-    print("Basic shell in Python, designed for all Operating Systems.\nVersion 0.1")
+    print("Basic shell in Python, works fully for all Operating Systems.\nVersion 0.1")
     #Version 0.1: the shell now has help, aliases for "exit" and a utility to generate random things.
     runcommand()
 
