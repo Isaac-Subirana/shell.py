@@ -6,10 +6,6 @@ command = ""
 
 shellcommands = ["help", "default-help", "random"]
 
-def panic():
-    print("Something went wrong. Please try again.")
-    runcommand()
-
 def runcommand():
     command = input("\nshell.py 0.1> ")
     isnotexit(command)
