@@ -11,12 +11,12 @@ def runcommand():
     isnotexit(command)
     try:
         if command.lower() in shellcommands:
-            runshellcommand(command)
+            runshellcommand(command, shell=True)
             runcommand()
         else: 
-            subprocess_run(command)
+            subprocess_run(command, shell=True)
             runcommand()
-    except FileNotFoundError:
+    except:
         print("Error: Your system does not recognize the command you tried to run.")
         runcommand()
     

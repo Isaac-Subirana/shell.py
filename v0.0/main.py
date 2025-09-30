@@ -6,10 +6,10 @@ def run():
     command = input("\n> ")
     isnotexit(command)
     try:
-        subprocess_run(command)
+        subprocess_run(command, shell=True)
         run()
         command = input("\n> ")
-    except FileNotFoundError:
+    except:
         print("Error: Your system does not recognize the command you tried to run.")
         run()
         command = input("\n> ")

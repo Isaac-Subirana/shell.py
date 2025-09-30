@@ -5,7 +5,7 @@ from install_utility import install_utility_main
 
 command = ""
 
-shellcommands = ["help", "default-help", "echo", "random", "install"]
+shellcommands = ["help", "default-help", "random", "install"]
 
 def echo(string):
     print(string)
@@ -21,8 +21,8 @@ def runcommand():
                     runshellcommand(command)
                     break
             else: 
-                subprocess_run(command)
-        except FileNotFoundError:
+                subprocess_run(command, shell=True)
+        except:
             print(f"Error: Your system does not recognize the command you tried to run (' {command} ').")
     runcommand()
     
@@ -37,8 +37,6 @@ def runshellcommand(command):
         help_utility.help_utility_main()
     elif command.lower() == "default-help":
         subprocess_run("help")
-    elif "echo" == command[:4].lower():
-        echo(command[5:])
     elif command.lower() == "random":
         random_utility_main()
     elif "install" in command.lower():

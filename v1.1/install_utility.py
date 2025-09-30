@@ -9,7 +9,7 @@ def install_pip_modules_list(sure):
     elif "n" in sure:
         wait()
     else:
-        sure= input("Please input [Y]es or [N]o.\t") 
+        sure = input("Please input [Y]es or [N]o.\t") 
         install_pip_modules_list(sure)
 
 def install_pip_module(target):
@@ -25,7 +25,7 @@ def install_winget_apps_list(sure):
     elif "n" in sure:
         wait()
     else:
-        sure= input("Please input [Y]es or [N]o.\t") 
+        sure = input("Please input [Y]es or [N]o.\t") 
         install_winget_apps_list(sure)
 
 def install_winget_app(target):
@@ -61,7 +61,6 @@ def install_utility_main(command):
     
     else: 
         try: 
-            print(command)
-            subprocess_run(command)
-        except FileNotFoundError:
+            subprocess_run(command, shell=True)
+        except:
             print(f"Error: Your system does not recognize the command you tried to run (' {command} ').")

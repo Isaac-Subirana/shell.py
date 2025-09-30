@@ -70,8 +70,7 @@ def update_utility_main(command):
 
 
     else: 
-        try: 
-            print(command)
-            subprocess_run(command)
-        except FileNotFoundError:
+        try:
+            subprocess_run(command, shell=True)
+        except:
             print(f"Error: Your system does not recognize the command you tried to run  (' {command} ').")

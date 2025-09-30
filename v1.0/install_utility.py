@@ -53,15 +53,14 @@ def install_utility_main(command):
         sure = input("You have chosen to install a bunch of winget-available apps that the editor recommends. These are:" \
         "\n7zip, Microsoft Edit, Microsoft Powershell, Notepad++, Bulk Rename Utility, XnViewMP and VLC media player." \
         "\n\n Are you sure you want to continue (Y/N)?\n >_ ").lower()
-        install_winget_apps_list(sure)
+        install_winget_app_list(sure)
     elif c[0].lower() == "install" and c[1].lower() == "winget":
         install_winget_app((" ").join(c[2:]))
     elif c[0].lower() == "install" and (c[1].lower() == "apt" or c[1].lower() == "apt-get"):
         install_apt_app((" ").join(c[2:]))
     
     else: 
-        try: 
-            print(command)
+        try:
             subprocess_run(command)
-        except FileNotFoundError:
+        except:
             print(f"Error: Your system does not recognize the command ('{command}') you tried to run.")

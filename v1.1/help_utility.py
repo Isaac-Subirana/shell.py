@@ -3,7 +3,6 @@ def help_utility_main():
     print("\n Built-in commands:" \
     "      \n - help : shows this help menu." \
     "      \n - default-help : shows your system's help menu." \
-    "      \n - echo : prints the arguments given back to the user." \
     "      \n - random : lauches the random generator utility." \
     "      \n\n - exit / quit : exits the shell. " \
     "      \n\n Installing packages:" \
