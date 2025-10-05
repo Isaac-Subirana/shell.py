@@ -3,7 +3,7 @@ def help_utility_main():
     print("\n Built-in commands:" \
     "      \n - help : shows this help menu." \
     "      \n - system-help : shows your system's help menu." \
-    "      \n - random : lauches the random generator utility." \
+    "      \n - random : launches the random generator utility." \
     "      \n\n - exit / quit : exits the shell. " \
     "      \n\n Installing packages:" \
     "      \n - install pip [package] : installs the provided package." \
