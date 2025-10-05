@@ -4,7 +4,7 @@ from random_utility import random_utility_main
 
 command = ""
 
-shellcommands = ["help", "default-help", "random"]
+shellcommands = ["help", "system-help", "random"]
 
 def runcommand():
     command = input("\n> ")
@@ -29,7 +29,7 @@ def isnotexit(command):
 def runshellcommand(command):
     if command == "help":
         help_utility.help_utility_main()
-    elif command == "default-help":
+    elif command == "system-help":
         subprocess_run("help")
     elif command == "random":
         random_utility_main()

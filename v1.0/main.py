@@ -5,7 +5,7 @@ from install_utility import install_utility_main
 
 command = ""
 
-shellcommands = ["help", "default-help", "random", "install"]
+shellcommands = ["help", "system-help", "random", "install"]
 
 def echo(string):
     print(string)
@@ -35,7 +35,7 @@ def isnotexit(command):
 def runshellcommand(command):
     if command.lower() == "help":
         help_utility.help_utility_main()
-    elif command.lower() == "default-help":
+    elif command.lower() == "system-help":
         subprocess_run("help")
     elif command.lower() == "random":
         random_utility_main()
