@@ -29,8 +29,8 @@ def isnotexit(command):
 def runshellcommand(command):
     if command == "help":
         help_utility.help_utility_main()
-    elif command == "system-help":
-        subprocess_run("help")
+    elif command.lower()[:11] == "system-help":
+        subprocess_run("help" + command[11:])
     elif command == "random":
         random_utility_main()
 
