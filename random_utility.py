@@ -1,3 +1,4 @@
+from colorama import Fore
 from random import choice, randint
 
 def dice():
@@ -16,33 +17,29 @@ def random_choice(l):
     c = choice(l)
     return c
 
-def wait():
-    input("\n---------- Press ENTER to go back to the random utility menu ----------")
-    random_utility_main()
-
 def random_utility_main():
-    print(" \nWelcome to the random generator utility!\n What do you want to do?\n")
-    print(" 1. Roll a dice \n 2. Toss a coin \n 3. Generate a random number between two given numbers \n 4. Generate a random choice from a given list \n\n Q. Quit this utility but stay in the shell. \n E. Completely exit the shell.")
-    inp = input("\n random > ").lower()
+    print(Fore.YELLOW + " \nWelcome to the random generator utility!\n What do you want to do?\n")
+    print(" 1. Roll a dice. \n 2. Toss a coin. \n 3. Generate a random integer between two given numbers. \n 4. Generate a random choice from a given list. \n\n Q. Quit this utility but stay in the shell. \n E. Completely exit the shell." + Fore.RESET)
+    inp = input(Fore.YELLOW + "\n random > " + Fore.RESET).lower()
     if "1" in inp:
         print(f"\n Your number has turned out to be a {dice()}!")
-        wait()
+        random_utility_main()
     elif "2" in inp:
         print(f"\n Your coin toss has come up {coin()}!")
-        wait()
+        random_utility_main()
     elif "3" in inp:
         try:
-            minvalue = int(input(" What's the minimum your number can be? "))
+            minvalue = int(input(" From: "))
             try:
-                maxvalue = int(input(" What's the maximum your number can be? "))
+                maxvalue = int(input(" To: "))
                 print(f"\n Your number has turned out to be {random_number(minvalue, maxvalue)}")
-                wait()
+                random_utility_main()
             except ValueError:
-                print("\n You are supposed to input a number!")
-                wait()
+                print(Fore.RED + "\n You are supposed to input a number!" + Fore.RESET)
+                random_utility_main()
         except ValueError:
-            print("\n You are supposed to input a number!")
-            wait()
+            print(Fore.RED + "\n You are supposed to input a number!" + Fore.RESET)
+            random_utility_main()
     elif "4" in inp:
         l=[]
         try:
@@ -51,14 +48,13 @@ def random_utility_main():
                 item = input(f" Input your list's item number {i+1}: ")
                 l.append(item)
             print(f"\n Your list's random item is '{random_choice(l)}'!")
-            wait()
+            random_utility_main()
         except ValueError:
-            print("\n You are supposed to input a number!")
-            wait()
-    elif "q" in inp.lower():
+            print(Fore.RED + "\n You are supposed to input a number!" + Fore.RESET)
+            random_utility_main()
+    elif "quit" == inp.lower() or "q" == inp[0].lower():
         pass
-    elif "e" in inp.lower():
+    elif "exit" == inp.lower() or "e" == inp[0].lower():
         exit()
     else: 
-        print("\n Sorry, this option does not exist (yet!).")
-        wait()
+        print(Fore.YELLOW + "\n Sorry, this option does not exist (yet!)." + Fore.RESET)

@@ -13,20 +13,20 @@ from sys import stdout
 
 sleep(0.750)
 
-print("   Installing and importing external libraries:")
+print("   Checking whether colorama is installed, installing it if it isn't...", end = " "), stdout.flush()
+subprocess_run("python -m pip install colorama -q")
+from colorama import Fore
+print(Fore.GREEN + "Done!" + Fore.YELLOW +" I can now print in color!" + Fore.RESET)
+
+print(Fore.YELLOW + "   Importing other external libraries:" + Fore.RESET)
 sleep(0.250)
 
-print("      Checking whether colorama is installed... ", end=""), stdout.flush()
-subprocess_run("python -m pip install colorama -q")
-print("Done!")
-
-from colorama import Fore
 for i in external_libraries: 
     print(Fore.RESET + f"      Importing {i}... ", end=""), stdout.flush()
     sleep(randint(1, 100) / 1000)
     print(Fore.GREEN + "Done!")
 
-print(Fore.RESET + "   Importing internal libraries:")
+print(Fore.YELLOW + "   Checking integrity and importing internal libraries:")
 sleep(0.250)
 for i in internal_libraries:
     print(Fore.RESET + f"      Importing {i}... ", end=""), stdout.flush()
@@ -56,18 +56,18 @@ shellcommands = ["help", "system-help", "random", "install", "search", "update",
 command = ""
 
 def runcommand():
-    command_lst = input(Fore.LIGHTYELLOW_EX + "\nshell.py" + Fore.RESET + f" - {getcwd()} > ").split("&&")
+    command_lst = input(Fore.YELLOW + "\nshell.py" + Fore.RESET + f" - {getcwd()} > ").split("&&")
     for i in range(0, len(command_lst)):
         command = command_lst[i]
         isnotexit(command)
         try:
-            for cmd in shellcommands:
-                if cmd in command.lower():
-                    runshellcommand(command)
-                    break
-            else: 
+            cmd = command.split()
+            if cmd[0].lower() in shellcommands:
+                runshellcommand(command)
+
+            else:
                 subprocess_run(command, shell=True)
-                break
+
         except:
             print(Fore.RED + f"Error: Your system does not recognize the command you tried to run ('{command}')." + Fore.RESET)
     runcommand()
@@ -76,10 +76,8 @@ def runcommand():
 def isnotexit(command):
     exitaliases = ["exit", "quit", "e", "q"]
     if command.lower() in exitaliases:
+        print("Exit... Done!")
         exit()
-
-def echo(string):
-    print(string)
  
 def runshellcommand(command):
     command = command.lower()
@@ -90,13 +88,16 @@ def runshellcommand(command):
     elif command == "cd":
         print(getcwd())
 
-    elif command[:3] == "cd ":
+    elif command[:2] == "cd":
         cd_to = getcwd() + "/" + command[3:]
-        if exists(cd_to) or exists(command[3:]):
+        if exists(command[3:]):
             chdir(command[3:])
             print(getcwd())
+        elif exists(cd_to):
+            chdir(cd_to)
+            print(getcwd())
         else:
-            print("The path you specified does not exist, so I can not 'cd' into it. \nDid you want to create a folder? Try 'mkdir'!")
+            print(Fore.RED + "The path you specified does not exist, so I can not 'cd' into it." + Fore.YELLOW + "\nDid you want to create a folder? Try 'mkdir'!" + Fore.RESET)
 
     elif command[:11] == "system-help":
         subprocess_run("help" + command[11:])
@@ -115,7 +116,7 @@ def runshellcommand(command):
 
 def main():
     subprocess_run("cls", shell=True)
-    print(Fore.RESET + "Welcome to " + Fore.LIGHTYELLOW_EX + "shell.py" + Fore.RESET + ", a basic shell in Python!")
+    print(Fore.RESET + "Welcome to " + Fore.YELLOW + "shell.py" + Fore.RESET + ", a basic shell in Python!")
     sleep(1)
     runcommand()
 
