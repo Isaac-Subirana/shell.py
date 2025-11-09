@@ -1,21 +1,62 @@
+external_libraries = ["sys", "os", "time", "random", "colorama", "subprocess"]
+internal_libraries = ["help_utility", "random_utility", "install_utility", "update_utility", "uninstall_utility"]
+
+print("Initializing...")
+
+from subprocess import run as subprocess_run
+from webbrowser import open
+from os import getcwd, chdir
+from os.path import exists
+from time import sleep
+from random import randint
+from sys import stdout
+
+sleep(0.750)
+
+print("   Installing and importing external libraries:")
+sleep(0.250)
+
+print("      Checking whether colorama is installed... ", end=""), stdout.flush()
+subprocess_run("python -m pip install colorama -q")
+print("Done!")
+
+from colorama import Fore
+for i in external_libraries: 
+    print(Fore.RESET + f"      Importing {i}... ", end=""), stdout.flush()
+    sleep(randint(1, 100) / 1000)
+    print(Fore.GREEN + "Done!")
+
+print(Fore.RESET + "   Importing internal libraries:")
+sleep(0.250)
+for i in internal_libraries:
+    print(Fore.RESET + f"      Importing {i}... ", end=""), stdout.flush()
+    if exists(f"{i}.py"):
+        sleep(randint(1, 100) / 1000)
+        print(Fore.GREEN + "Done!")
+    else:
+        print(Fore.RED + f"\n\tERROR! {i}.py not found!")
+        print("\tPlease, redownload the code from github and re-run!")
+        print("\tWill automatically open the GitHub project and exit the shell in ", end=""), stdout.flush()
+        for i in range(0, 15):
+            print(15 - i, end=", "), stdout.flush()
+            sleep(1)
+        open("https://github.com/Isaac-Subirana/shell.py")
+        exit()
+sleep(0.500)
+
 import help_utility
 from random_utility import random_utility_main
 from install_utility import install_utility_main
 from update_utility import update_utility_main
+from uninstall_utility import uninstall_utility_main
 
-from subprocess import run as subprocess_run
-from os import getcwd, chdir
-from time import sleep
+
+shellcommands = ["help", "system-help", "random", "install", "search", "update", "upgrade", "cd", "list", "uninstall"]
 
 command = ""
 
-shellcommands = ["help", "system-help", "random", "install", "update", "upgrade", "cd"]
-
-def echo(string):
-    print(string)
-
 def runcommand():
-    command_lst = input(f"\nshell.py - {getcwd()} > ").split(", ")
+    command_lst = input(Fore.LIGHTYELLOW_EX + "\nshell.py" + Fore.RESET + f" - {getcwd()} > ").split("&&")
     for i in range(0, len(command_lst)):
         command = command_lst[i]
         isnotexit(command)
@@ -23,10 +64,12 @@ def runcommand():
             for cmd in shellcommands:
                 if cmd in command.lower():
                     runshellcommand(command)
+                    break
             else: 
                 subprocess_run(command, shell=True)
+                break
         except:
-            print(f"Error: Your system does not recognize the command you tried to run ('{command}').")
+            print(Fore.RED + f"Error: Your system does not recognize the command you tried to run ('{command}')." + Fore.RESET)
     runcommand()
     
 
@@ -34,30 +77,45 @@ def isnotexit(command):
     exitaliases = ["exit", "quit", "e", "q"]
     if command.lower() in exitaliases:
         exit()
+
+def echo(string):
+    print(string)
  
 def runshellcommand(command):
     command = command.lower()
 
     if command == "help":
         help_utility.help_utility_main()
+
     elif command == "cd":
-        getcwd()
+        print(getcwd())
+
     elif command[:3] == "cd ":
-        chdir(command[3:])
+        cd_to = getcwd() + "/" + command[3:]
+        if exists(cd_to) or exists(command[3:]):
+            chdir(command[3:])
+            print(getcwd())
+        else:
+            print("The path you specified does not exist, so I can not 'cd' into it. \nDid you want to create a folder? Try 'mkdir'!")
+
     elif command[:11] == "system-help":
         subprocess_run("help" + command[11:])
+
     elif command == "random":
         random_utility_main()
-    elif "install" in command:
-        install_utility_main(command)
+
     elif "update" in command or "upgrade" in command:
         update_utility_main(command)
 
+    elif "install" in command or "search" in command:
+        install_utility_main(command)   
+    
+    elif "uninstall" in command or "list" in command:
+        uninstall_utility_main(command)
+
 def main():
-    print("Initializing...")
-    sleep(0.600)
     subprocess_run("cls", shell=True)
-    print("Welcome to shell.py, a basic shell in Python!")
+    print(Fore.RESET + "Welcome to " + Fore.LIGHTYELLOW_EX + "shell.py" + Fore.RESET + ", a basic shell in Python!")
     sleep(1)
     runcommand()
 
