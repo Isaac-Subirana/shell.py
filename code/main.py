@@ -11,7 +11,7 @@ from time import sleep
 from random import randint
 from sys import stdout
 
-sleep(0.750)
+sleep(0.500)
 
 print("   Checking whether colorama is installed, installing it if it isn't...", end = " "), stdout.flush()
 subprocess_run("python -m pip install colorama -q")
@@ -31,7 +31,6 @@ sleep(0.250)
 for i in internal_libraries:
     print(Fore.RESET + f"      Importing {i}... ", end=""), stdout.flush()
     if exists(f"{i}.py"):
-        sleep(randint(1, 100) / 1000)
         print(Fore.GREEN + "Done!")
     else:
         print(Fore.RED + f"\n\tERROR! {i}.py not found!")

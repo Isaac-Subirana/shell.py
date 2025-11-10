@@ -1,11 +1,12 @@
 from subprocess import run as subprocess_run
 from time import sleep
 from webbrowser import open
+from colorama import Fore
 
 def install_pip_module(target):
         print("Updating pip...")
         subprocess_run(f"python -m pip install --upgrade pip -q")
-        print(f"Installing {target}...")
+        print(f"Installing {target}..." + Fore.RESET)
         subprocess_run(f"python -m pip install {target}") 
 
 def search_pip(target):
@@ -39,4 +40,4 @@ def install_utility_main(command):
         try: 
             subprocess_run(command, shell=True)
         except:
-            print(f"Error: Your system does not recognize the command you tried to run ('{command}').")
+            print(Fore.RED + f"Error: Your system does not recognize the command you tried to run ('{command}')." + Fore.RESET)

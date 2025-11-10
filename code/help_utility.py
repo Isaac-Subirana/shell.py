@@ -1,8 +1,7 @@
 from colorama import Fore
 
 def help_utility_main():
-    print( Fore.YELLOW + "Note that you can run multiple commands at once using '&&' between them." + Fore.RESET)
-    print( Fore.YELLOW + "Available commands: " + Fore.RESET)
+    print("\nAvailable commands: ")
     print("\n Built-in commands:" \
     "      \n - " + Fore.YELLOW + "help" + Fore.RESET + " : shows this help menu." \
     "      \n - " + Fore.YELLOW + "system-help" + Fore.RESET + ": shows your system's help menu." \
@@ -36,3 +35,4 @@ def help_utility_main():
     "      \n - " + Fore.YELLOW + "uninstall [package]" + Fore.RESET + " : uninstalls the provided package (if winget finds it)                                    - Works only for Windows." \
    
     "      \n - " + Fore.YELLOW + "list" + Fore.RESET + " : runs the 'list pip' command and the 'list apps' command                                                - Works only for Windows.")
+    print(Fore.YELLOW + "\nNote that you can run multiple commands at once using '&&' between them." + Fore.RESET)
