@@ -42,7 +42,10 @@ from update_utility import update_utility_main
 from uninstall_utility import uninstall_utility_main
 
 
-shellcommands = ["help", "system-help", "random", "install", "search", "update", "upgrade", "cd", "list", "uninstall", "system"]
+eastereggs = ["rick", "canyouhearme", "max", "maxwell"]
+extra = ["search", "install", "update", "upgrade", "list", "uninstall"]
+basic = ["help", "system-help", "random", "cd", "system"]
+shellcommands = basic + extra + eastereggs
 
 command = ""
 
@@ -92,7 +95,7 @@ def runshellcommand(command):
             print(Fore.RED + "The path you specified does not exist, so I can not 'cd' into it." + Fore.YELLOW + "\nDid you want to create a folder? Try 'mkdir'!" + Fore.RESET)
 
     elif command[:11] == "system-help":
-        subprocess_run("help" + command[11:])
+        subprocess_run("help" + command[11:], shell = True)
 
     elif command[:6] == "system":
         print(Fore.YELLOW + "Running the command you specified on your system shell..." + Fore.RESET)
@@ -110,6 +113,21 @@ def runshellcommand(command):
 
     elif "install" in command or "search" in command:
         install_utility_main(command)   
+    
+    elif command == "rick" or "canyouhearme" in command:
+        print("You can exit the following trick using Ctrl + C, and still be in this shell. " +  Fore.YELLOW + "\nGood luck!" + Fore.RESET)
+        for i in range(0, 5):
+            print(5 - i)
+            sleep(1)
+        sleep(1.500)
+        print(Fore.YELLOW + "Thought you could save yourself?" + Fore.RESET)
+        sleep(1)
+        subprocess_run("curl ascii.live/rick")
+    
+    elif command == "max" or command == "maxwell":
+        print("You can exit the following trick using Ctrl + C, and still be in this shell. " +  Fore.YELLOW + "\nGood luck!" + Fore.RESET)
+        sleep(3)
+        subprocess_run("curl ascii.live/maxwell")
 
 def main():
     subprocess_run("cls", shell=True)

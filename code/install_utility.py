@@ -6,7 +6,7 @@ from colorama import Fore
 def install_pip_module(target):
         print("Updating pip...")
         subprocess_run(f"python -m pip install --upgrade pip -q")
-        print(f"Installing {target}..." + Fore.RESET)
+        print(f"Installing {target}...")
         subprocess_run(f"python -m pip install {target}") 
 
 def search_pip(target):

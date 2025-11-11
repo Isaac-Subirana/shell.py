@@ -6,6 +6,9 @@ def help_utility_main():
     "      \n - " + Fore.YELLOW + "help" + Fore.RESET + " : shows this help menu." \
     "      \n - " + Fore.YELLOW + "system-help" + Fore.RESET + ": shows your system's help menu." \
     "      \n - " + Fore.YELLOW + "random" + Fore.RESET + " : launches the random generator utility." \
+    "      \n - " + Fore.YELLOW + "system [command]" + Fore.RESET + " : runs the specified command in the default system shell." \
+    "      \n - " + Fore.YELLOW + "rick / canyouhearme" + Fore.RESET + " : ... what do you think this command does?" \
+    "      \n - " + Fore.YELLOW + "max / maxwell" + Fore.RESET + " : Max. Isn't he cute?"
     "      \n\n - " + Fore.YELLOW + "exit / quit" + Fore.RESET + " : exits the shell. " \
     
     "      \n\n" + Fore.GREEN + "If you are on Linux, you can run the commands you'd normally run to install/update/uninstall packages through this shell." \
@@ -34,6 +37,5 @@ def help_utility_main():
     "      \n - " + Fore.YELLOW + "list apps" + Fore.RESET + " : lists all installed apps                                                                          - Works only for Windows." \
     "      \n - " + Fore.YELLOW + "uninstall [package]" + Fore.RESET + " : uninstalls the provided package (if winget finds it)                                    - Works only for Windows." \
    
-    "      \n - " + Fore.YELLOW + "list" + Fore.RESET + " : runs the 'list pip' command and the 'list apps' command                                                - Works only for Windows." \
-    "      \n - " + Fore.YELLOW + "system [command]" + Fore.RESET + " : runs the specified command in the default system shell.")
+    "      \n - " + Fore.YELLOW + "list" + Fore.RESET + " : runs the 'list pip' command and the 'list apps' command                                                - Works only for Windows.")
     print(Fore.YELLOW + "\nNote that you can run multiple commands at once using '&&' between them." + Fore.RESET)

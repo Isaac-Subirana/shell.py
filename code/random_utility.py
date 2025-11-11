@@ -18,8 +18,8 @@ def random_choice(l):
     return c
 
 def random_utility_main():
-    print(Fore.YELLOW + " \nWelcome to the random generator utility!\n What do you want to do?\n")
-    print(" 1. Roll a dice. \n 2. Toss a coin. \n 3. Generate a random integer between two given numbers. \n 4. Generate a random choice from a given list. \n\n Q. Quit this utility but stay in the shell. \n E. Completely exit the shell." + Fore.RESET)
+    print("\nWelcome to the " + Fore.YELLOW + "random generator utility!" + Fore.RESET + "\n What do you want to do?\n")
+    print(Fore.YELLOW + " 1. Roll" + Fore.RESET + " a dice. \n " + Fore.YELLOW + "2. Toss" + Fore.RESET + " a coin. \n" + Fore.YELLOW + " 3. Generate a random integer" + Fore.RESET + " between two given numbers. \n" + Fore.YELLOW + " 4. Generate a random choice" + Fore.RESET + " from a given list. \n\n " + Fore.YELLOW + "Q. Quit " + Fore.RESET + "this utility but stay in the shell. \n" + Fore.YELLOW + " E." + Fore.RESET + " Completely " + Fore.YELLOW + "exit" + Fore.RESET + " the shell." + Fore.RESET)
     inp = input(Fore.YELLOW + "\n random > " + Fore.RESET).lower()
     if "1" in inp:
         print("\n Your number has turned out to be a" + Fore.YELLOW + f"'{dice()}'" + Fore.RESET + "!")
