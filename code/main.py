@@ -94,7 +94,7 @@ def runshellcommand(command):
     elif command[:11] == "system-help":
         subprocess_run("help" + command[11:])
 
-    elif command[:6] == "system": # no li sap
+    elif command[:6] == "system":
         print(Fore.YELLOW + "Running the command you specified on your system shell..." + Fore.RESET)
         subprocess_run(command[7:], shell = True)
 
