@@ -34,5 +34,6 @@ def help_utility_main():
     "      \n - " + Fore.YELLOW + "list apps" + Fore.RESET + " : lists all installed apps                                                                          - Works only for Windows." \
     "      \n - " + Fore.YELLOW + "uninstall [package]" + Fore.RESET + " : uninstalls the provided package (if winget finds it)                                    - Works only for Windows." \
    
-    "      \n - " + Fore.YELLOW + "list" + Fore.RESET + " : runs the 'list pip' command and the 'list apps' command                                                - Works only for Windows.")
+    "      \n - " + Fore.YELLOW + "list" + Fore.RESET + " : runs the 'list pip' command and the 'list apps' command                                                - Works only for Windows." \
+    "      \n - " + Fore.YELLOW + "system [command]" + Fore.RESET + " : runs the specified command in the default system shell.")
     print(Fore.YELLOW + "\nNote that you can run multiple commands at once using '&&' between them." + Fore.RESET)

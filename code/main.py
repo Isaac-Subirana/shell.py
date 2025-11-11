@@ -1,35 +1,27 @@
-external_libraries = ["sys", "os", "time", "random", "colorama", "subprocess"]
 internal_libraries = ["help_utility", "random_utility", "install_utility", "update_utility", "uninstall_utility"]
 
 print("Initializing...")
+
+print("\nImporting some of python's default external libraries...")
 
 from subprocess import run as subprocess_run
 from webbrowser import open
 from os import getcwd, chdir
 from os.path import exists
 from time import sleep
-from random import randint
 from sys import stdout
 
-sleep(0.500)
+print("Done! I can now run commands, among other things!")
 
-print("   Checking whether colorama is installed, installing it if it isn't...", end = " "), stdout.flush()
-subprocess_run("python -m pip install colorama -q")
+print("\nChecking whether colorama is installed, installing it if it isn't..."), stdout.flush()
+subprocess_run("python -m pip install colorama")
 from colorama import Fore
-print(Fore.GREEN + "Done!" + Fore.YELLOW +" I can now print in color!" + Fore.RESET)
+print(Fore.GREEN + "\nDone!" + Fore.YELLOW +" I can now print in color!" + Fore.RESET)
 
-print(Fore.YELLOW + "   Importing other external libraries:" + Fore.RESET)
-sleep(0.250)
-
-for i in external_libraries: 
-    print(Fore.RESET + f"      Importing {i}... ", end=""), stdout.flush()
-    sleep(randint(1, 100) / 1000)
-    print(Fore.GREEN + "Done!")
-
-print(Fore.YELLOW + "   Checking integrity and importing internal libraries:")
+print(Fore.YELLOW + "\nChecking file integrity and importing internal libraries:")
 sleep(0.250)
 for i in internal_libraries:
-    print(Fore.RESET + f"      Importing {i}... ", end=""), stdout.flush()
+    print(Fore.RESET + f"   Importing {i}... ", end=""), stdout.flush()
     if exists(f"{i}.py"):
         print(Fore.GREEN + "Done!")
     else:
@@ -50,7 +42,7 @@ from update_utility import update_utility_main
 from uninstall_utility import uninstall_utility_main
 
 
-shellcommands = ["help", "system-help", "random", "install", "search", "update", "upgrade", "cd", "list", "uninstall"]
+shellcommands = ["help", "system-help", "random", "install", "search", "update", "upgrade", "cd", "list", "uninstall", "system"]
 
 command = ""
 
@@ -65,6 +57,7 @@ def runcommand():
                 runshellcommand(command)
 
             else:
+                print("Could not find this command in shell.py. Fallback to your system shell...")
                 subprocess_run(command, shell=True)
 
         except:
@@ -101,17 +94,22 @@ def runshellcommand(command):
     elif command[:11] == "system-help":
         subprocess_run("help" + command[11:])
 
+    elif command[:6] == "system": # no li sap
+        print(Fore.YELLOW + "Running the command you specified on your system shell..." + Fore.RESET)
+        subprocess_run(command[7:], shell = True)
+
     elif command == "random":
         random_utility_main()
 
     elif "update" in command or "upgrade" in command:
         update_utility_main(command)
 
-    elif "install" in command or "search" in command:
-        install_utility_main(command)   
     
     elif "uninstall" in command or "list" in command:
         uninstall_utility_main(command)
+
+    elif "install" in command or "search" in command:
+        install_utility_main(command)   
 
 def main():
     subprocess_run("cls", shell=True)

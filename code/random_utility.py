@@ -22,17 +22,17 @@ def random_utility_main():
     print(" 1. Roll a dice. \n 2. Toss a coin. \n 3. Generate a random integer between two given numbers. \n 4. Generate a random choice from a given list. \n\n Q. Quit this utility but stay in the shell. \n E. Completely exit the shell." + Fore.RESET)
     inp = input(Fore.YELLOW + "\n random > " + Fore.RESET).lower()
     if "1" in inp:
-        print(f"\n Your number has turned out to be a {dice()}!")
+        print("\n Your number has turned out to be a" + Fore.YELLOW + f"'{dice()}'" + Fore.RESET + "!")
         random_utility_main()
     elif "2" in inp:
-        print(f"\n Your coin toss has come up {coin()}!")
+        print("\n Your coin toss has come up " + Fore.YELLOW + f"'{coin()}'" + Fore.RESET + "!")
         random_utility_main()
     elif "3" in inp:
         try:
             minvalue = int(input(" From: "))
             try:
                 maxvalue = int(input(" To: "))
-                print(f"\n Your number has turned out to be {random_number(minvalue, maxvalue)}")
+                print("\n Your number has turned out to be" + Fore.YELLOW + f"'{random_number(minvalue, maxvalue)}'" + Fore.RESET)
                 random_utility_main()
             except ValueError:
                 print(Fore.RED + "\n You are supposed to input a number!" + Fore.RESET)
@@ -47,7 +47,7 @@ def random_utility_main():
             for i in range(0, length):
                 item = input(f" Input your list's item number {i+1}: ")
                 l.append(item)
-            print(f"\n Your list's random item is '{random_choice(l)}'!")
+            print("\n Your list's random item is " + Fore.YELLOW + f"'{random_choice(l)}'" + Fore.RESET + "!")
             random_utility_main()
         except ValueError:
             print(Fore.RED + "\n You are supposed to input a number!" + Fore.RESET)

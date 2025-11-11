@@ -66,6 +66,7 @@ def update_utility_main(command):
 
     else: 
         try:
+            print("Could not find this command in shell.py. Fallback to your system shell...")
             subprocess_run(command, shell=True)
         except:
             print(Fore.RED + f"Error: Your system does not recognize the command you tried to run  ('{command}')." + Fore.RESET)
