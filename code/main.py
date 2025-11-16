@@ -16,9 +16,9 @@ print("Done! I can now run commands, among other things!")
 print("\nChecking whether colorama is installed, installing it if it isn't..."), stdout.flush()
 subprocess_run("python -m pip install colorama")
 from colorama import Fore
-print(Fore.GREEN + "\nDone!" + Fore.YELLOW +" I can now print in color!" + Fore.RESET)
+print(Fore.GREEN + "\nDone!" + Fore.CYAN +" I can now print in color!" + Fore.RESET)
 
-print(Fore.YELLOW + "\nChecking file integrity and importing internal libraries:")
+print(Fore.CYAN + "\nChecking file integrity and importing internal libraries:")
 sleep(0.250)
 for i in internal_libraries:
     print(Fore.RESET + f"   Importing {i}... ", end=""), stdout.flush()
@@ -50,7 +50,7 @@ shellcommands = basic + extra + eastereggs
 command = ""
 
 def runcommand():
-    command_lst = input(Fore.YELLOW + "\nshell.py" + Fore.RESET + f" - {getcwd()} > ").split("&&")
+    command_lst = input(Fore.CYAN + "\nshell.py" + Fore.RESET + f" - {getcwd()} > ").split("&&")
     for i in range(0, len(command_lst)):
         command = command_lst[i]
         isnotexit(command)
@@ -92,13 +92,13 @@ def runshellcommand(command):
             chdir(cd_to)
             print(getcwd())
         else:
-            print(Fore.RED + "The path you specified does not exist, so I can not 'cd' into it." + Fore.YELLOW + "\nDid you want to create a folder? Try 'mkdir'!" + Fore.RESET)
+            print(Fore.RED + "The path you specified does not exist, so I can not 'cd' into it." + Fore.CYAN + "\nDid you want to create a folder? Try 'mkdir'!" + Fore.RESET)
 
     elif command[:11] == "system-help":
         subprocess_run("help" + command[11:], shell = True)
 
     elif command[:6] == "system":
-        print(Fore.YELLOW + "Running the command you specified on your system shell..." + Fore.RESET)
+        print(Fore.CYAN + "Running the command you specified on your system shell..." + Fore.RESET)
         subprocess_run(command[7:], shell = True)
 
     elif command == "random":
@@ -115,23 +115,23 @@ def runshellcommand(command):
         install_utility_main(command)   
     
     elif command == "rick" or "canyouhearme" in command:
-        print("You can exit the following trick using Ctrl + C, and still be in this shell. " +  Fore.YELLOW + "\nGood luck!" + Fore.RESET)
+        print("You can exit the following trick using Ctrl + C, and still be in this shell. " +  Fore.CYAN + "\nGood luck!" + Fore.RESET)
         for i in range(0, 5):
             print(5 - i)
             sleep(1)
         sleep(1.500)
-        print(Fore.YELLOW + "Thought you could save yourself?" + Fore.RESET)
+        print(Fore.CYAN + "Thought you could save yourself?" + Fore.RESET)
         sleep(1)
         subprocess_run("curl ascii.live/rick")
     
     elif command == "max" or command == "maxwell":
-        print("You can exit the following trick using Ctrl + C, and still be in this shell. " +  Fore.YELLOW + "\nGood luck!" + Fore.RESET)
+        print("You can exit the following trick using Ctrl + C, and still be in this shell. " +  Fore.CYAN + "\nGood luck!" + Fore.RESET)
         sleep(3)
         subprocess_run("curl ascii.live/maxwell")
 
 def main():
     subprocess_run("cls", shell=True)
-    print(Fore.RESET + "Welcome to " + Fore.YELLOW + "shell.py" + Fore.RESET + ", a basic shell in Python!")
+    print(Fore.RESET + "Welcome to " + Fore.CYAN + "shell.py" + Fore.RESET + ", a basic shell in Python!")
     sleep(1)
     runcommand()
 
