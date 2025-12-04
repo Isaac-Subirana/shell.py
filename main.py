@@ -18,29 +18,21 @@ subprocess_run("python -m pip install colorama")
 from colorama import Fore
 print(Fore.GREEN + "\nDone!" + Fore.CYAN +" I can now print in color!" + Fore.RESET)
 
-print(Fore.CYAN + "\nChecking file integrity and importing internal libraries:")
-sleep(0.250)
-for i in internal_libraries:
-    print(Fore.RESET + f"   Importing {i}... ", end=""), stdout.flush()
-    if exists(f"{i}.py"):
-        print(Fore.GREEN + "Done!")
-    else:
-        print(Fore.RED + f"\n\tERROR! {i}.py not found!")
-        print("\tPlease, redownload the code from github and re-run!")
-        print("\tWill automatically open the GitHub project and exit the shell in ", end=""), stdout.flush()
-        for i in range(0, 15):
-            print(15 - i, end=", "), stdout.flush()
-            sleep(1)
-        open("https://github.com/Isaac-Subirana/shell.py")
-        exit()
+print(Fore.CYAN + "\nImporting internal libraries..." + Fore.RESET, end=""), stdout.flush()
 sleep(0.500)
-
-import help_utility
-from random_utility import random_utility_main
-from install_utility import install_utility_main
-from update_utility import update_utility_main
-from uninstall_utility import uninstall_utility_main
-
+try:
+    import help_utility
+    from random_utility import random_utility_main
+    from install_utility import install_utility_main
+    from update_utility import update_utility_main
+    from uninstall_utility import uninstall_utility_main
+    print(Fore.GREEN + " Done!")
+except: 
+    print(Fore.RED + " ERROR!\nError: internal libraries not found! Please redownload this project from its github project (github.com/Isaac-Subirana/shell.py) which should open in your default browser in 3 seconds.")
+    sleep(3)
+    open("https://github.com/Isaac-Subirana/shell.py")
+    input("\n" + Fore.RESET + "-" * 50 + "Press ENTER to exit." + "-" * 50)
+    exit()
 
 eastereggs = ["rick", "canyouhearme", "max", "maxwell"]
 extra = ["search", "install", "update", "upgrade", "list", "uninstall"]
