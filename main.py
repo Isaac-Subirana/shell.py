@@ -5,8 +5,8 @@ print("Initializing...")
 print("\nImporting some of python's default external libraries...")
 
 from subprocess import run as subprocess_run
-from webbrowser import open
-from os import getcwd, chdir
+from webbrowser import open as open_browser
+from os import getcwd, chdir, getlogin, remove
 from os.path import exists
 from time import sleep
 from sys import stdout
@@ -19,7 +19,6 @@ from colorama import Fore
 print(Fore.GREEN + "\nDone!" + Fore.CYAN +" I can now print in color!" + Fore.RESET)
 
 print(Fore.CYAN + "\nImporting internal libraries..." + Fore.RESET, end=""), stdout.flush()
-sleep(0.500)
 try:
     import help_utility
     from random_utility import random_utility_main
@@ -28,21 +27,21 @@ try:
     from uninstall_utility import uninstall_utility_main
     print(Fore.GREEN + " Done!")
 except: 
-    print(Fore.RED + " ERROR!\nError: internal libraries not found! Please redownload this project from its github project (github.com/Isaac-Subirana/shell.py) which should open in your default browser in 3 seconds.")
+    print(Fore.RED + " NOT DONE!\nError: internal libraries not found! Please redownload this project from its github project (github.com/Isaac-Subirana/shell.py) which should open in your default browser in 3 seconds.")
     sleep(3)
-    open("https://github.com/Isaac-Subirana/shell.py")
+    open_browser("https://github.com/Isaac-Subirana/shell.py")
     input("\n" + Fore.RESET + "-" * 50 + "Press ENTER to exit." + "-" * 50)
     exit()
 
 eastereggs = ["rick", "canyouhearme", "max", "maxwell"]
 extra = ["search", "install", "update", "upgrade", "list", "uninstall"]
-basic = ["help", "system-help", "random", "cd", "system"]
+basic = ["help", "random", "cd", "system", "isay", "echo"]
 shellcommands = basic + extra + eastereggs
 
 command = ""
 
 def runcommand():
-    command_lst = input(Fore.CYAN + "\nshell.py" + Fore.RESET + f" - {getcwd()} > ").split("&&")
+    command_lst = input(Fore.CYAN + "\nshell.py" + Fore.RESET + f" - {getcwd()} > ").split(";")
     for i in range(0, len(command_lst)):
         command = command_lst[i]
         isnotexit(command)
@@ -52,7 +51,7 @@ def runcommand():
                 runshellcommand(command)
 
             else:
-                print("Could not find this command in shell.py. Fallback to your system shell...")
+                print(Fore.CYAN + "Could not find this command in shell.py. " + Fore.RESET + "Fallback to your system shell..." + Fore.RESET)
                 subprocess_run(command, shell=True)
 
         except:
@@ -69,7 +68,15 @@ def isnotexit(command):
 def runshellcommand(command):
     command = command.lower()
 
-    if command == "help":
+    if command[:4] == "isay":
+        command = command[5:]
+        print(Fore.CYAN + f"Running '{command}' in the default system shell as administrator (it will open in a separate window)..." + Fore.RESET)
+        
+        with open(f"C:\\Users\\{getlogin()}\\Documents\\isay_command-runner.bat", "w") as file:
+            file.write(f"""@echo off\nnet session >nul 2>&1 || (powershell start-process -filepath '%~f0' -verb runas && exit /b)\n{command}\npause\ndel "%~f0" >nul 2>&1""")
+        subprocess_run(f"C:\\Users\\{getlogin()}\\Documents\\isay_command-runner.bat", shell = True)
+
+    elif command == "help":
         help_utility.help_utility_main()
 
     elif command == "cd":
@@ -86,8 +93,19 @@ def runshellcommand(command):
         else:
             print(Fore.RED + "The path you specified does not exist, so I can not 'cd' into it." + Fore.CYAN + "\nDid you want to create a folder? Try 'mkdir'!" + Fore.RESET)
 
-    elif command[:11] == "system-help":
-        subprocess_run("help" + command[11:], shell = True)
+    elif command[:4] == "echo":
+        specialfunctions = ["<", ">", "|", "&", "%", '"', "!", "^", "*", "(", ")", "?", "[", "]", ":", "{", "}"]
+        specialfunction = False
+
+        for i in specialfunctions:
+            if i in command:
+                specialfunction = True
+                break
+
+        if specialfunction == True:
+            subprocess_run(command)
+        else:
+            print(command[5:])
 
     elif command[:6] == "system":
         print(Fore.CYAN + "Running the command you specified on your system shell..." + Fore.RESET)

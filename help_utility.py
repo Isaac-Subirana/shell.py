@@ -4,9 +4,9 @@ def help_utility_main():
     print("\nAvailable commands: ")
     print("\n Built-in commands:" \
     "      \n - " + Fore.CYAN + "help" + Fore.RESET + " : shows this help menu." \
-    "      \n - " + Fore.CYAN + "system-help" + Fore.RESET + ": shows your system's help menu." \
     "      \n - " + Fore.CYAN + "random" + Fore.RESET + " : launches the random generator utility." \
     "      \n - " + Fore.CYAN + "system [command]" + Fore.RESET + " : runs the specified command in the default system shell." \
+    "      \n - " + Fore.CYAN + "isay [command]" + Fore.RESET + " : runs the specified command in the default system shell, with admin privileges.             - Works only for Windows." \
     "      \n - " + Fore.CYAN + "rick / canyouhearme" + Fore.RESET + " : ... what do you think this command does?" \
     "      \n - " + Fore.CYAN + "max / maxwell" + Fore.RESET + " : Max. Isn't he cute?"
     "      \n\n - " + Fore.CYAN + "exit / quit" + Fore.RESET + " : exits the shell. " \
@@ -34,8 +34,7 @@ def help_utility_main():
     "      \n\n Listing and uninstalling packages:" \
     "      \n - " + Fore.CYAN + "list pip" + Fore.RESET + " : lists all pip-managed packages." \
     "      \n - " + Fore.CYAN + "uninstall pip [package]" + Fore.RESET + " : uninstalls the provided package." \
-    "      \n - " + Fore.CYAN + "list apps" + Fore.RESET + " : lists all installed apps                                                                          - Works only for Windows." \
-    "      \n - " + Fore.CYAN + "uninstall [package]" + Fore.RESET + " : uninstalls the provided package (if winget finds it)                                    - Works only for Windows." \
-   
-    "      \n - " + Fore.CYAN + "list" + Fore.RESET + " : runs the 'list pip' command and the 'list apps' command                                                - Works only for Windows.")
-    print(Fore.CYAN + "\nNote that you can run multiple commands at once using '&&' between them." + Fore.RESET)
+    "      \n - " + Fore.CYAN + "list apps" + Fore.RESET + " : lists all installed apps                                                                         - Works only for Windows." \
+    "      \n - " + Fore.CYAN + "uninstall [package]" + Fore.RESET + " : uninstalls the provided package (if winget finds it)                                   - Works only for Windows." \
+    "      \n - " + Fore.CYAN + "list" + Fore.RESET + " : runs the 'list pip' command and the 'list apps' command                                               - Works only for Windows.")
+    print(Fore.CYAN + "\nNote that you can run multiple commands at once using ';' between them. You can also use '&&' for your system's default shell commands." + Fore.RESET)

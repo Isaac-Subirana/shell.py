@@ -1,24 +1,27 @@
 from subprocess import run as subprocess_run
 from colorama import Fore
+import sys
+
+def update_pip():
+    print(Fore.CYAN + "\nUpdating pip..." + Fore.RESET, end=" "), sys.stdout.flush()
+    subprocess_run("python -m pip install --upgrade pip -q")
+    print(Fore.GREEN + "Done!" + Fore.RESET)
 
 def update_pip_modules_all():
-    print("\nUpdating pip...")
-    subprocess_run("python.exe -m pip install --upgrade pip -q")
-    subprocess_run("pip install --upgrade pip-review -q")
+    update_pip()
+    subprocess_run("python -m pip install --upgrade pip-review -q")
     print(f"\nAvailable updates: (confirm to update)")
     subprocess_run("pip-review -i")
 
 def update_pip_module(target):
-        print("\nUpdating pip...")
-        subprocess_run(f"python.exe -m pip install --upgrade pip -q")
+        update_pip()
         print(f"Updating {target}...")
-        subprocess_run(f"pip install --upgrade {target}") 
+        subprocess_run(f"python -m pip install --upgrade {target}") 
 
 def search_pip_updates():
-    print("\nUpdating pip...")
-    subprocess_run("python.exe -m pip install --upgrade pip -q")
+    update_pip()
     print("Searching for updates...\n")
-    subprocess_run("pip list --outdated")
+    subprocess_run("python -m pip list --outdated")
 
 def update_winget_apps_all():
     subprocess_run("winget upgrade --all --include-unknown")
@@ -36,13 +39,14 @@ def update_utility_main(command):
     if c[0] == "update" or c[0] == "upgrade":
 
         if c[1] == "all":
-            if c[2] == "pip":
-                update_pip_modules_all()
-            elif c[2] == "app":
+            if len(c) == 2:
                 update_winget_apps_all()
+                update_pip_modules_all()
             else:
-                update_winget_apps_all()
-                update_pip_modules_all()
+                if c[2] == "pip":
+                    update_pip_modules_all()
+                elif c[2] == "app":
+                    update_winget_apps_all()
         
         elif c[1] == "pip":
             update_pip_module((" ").join(c[2:]))
