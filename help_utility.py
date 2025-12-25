@@ -7,6 +7,9 @@ def help_utility_main():
     "      \n - " + Fore.CYAN + "random" + Fore.RESET + " : launches the random generator utility." \
     "      \n - " + Fore.CYAN + "system [command]" + Fore.RESET + " : runs the specified command in the default system shell." \
     "      \n - " + Fore.CYAN + "isay [command]" + Fore.RESET + " : runs the specified command in the default system shell, with admin privileges.             - Works only for Windows." \
+    "      \n - " + Fore.CYAN + "cd / cd [folder/path]" + Fore.RESET + " : shows the path you are currently working in / changes your working directory."
+    "      \n - " + Fore.CYAN + "mkdir [folder/path]" + Fore.RESET + " : creates the folder/path you pass it."
+    "      \n - " + Fore.CYAN + "delete [folder/file/path]" + Fore.RESET + " : deletes the folder/file/path you pass it."
     "      \n - " + Fore.CYAN + "rick / canyouhearme" + Fore.RESET + " : ... what do you think this command does?" \
     "      \n - " + Fore.CYAN + "max / maxwell" + Fore.RESET + " : Max. Isn't he cute?"
     "      \n\n - " + Fore.CYAN + "exit / quit" + Fore.RESET + " : exits the shell. " \
@@ -28,7 +31,7 @@ def help_utility_main():
     "      \n - " + Fore.CYAN + "update pip [target]" + Fore.RESET + " : updates the provided package (if it isn't installed, it installs it)." \
     
     "      \n - " + Fore.CYAN + "update all apps" + Fore.RESET + " : updates all of the outdated winget-available apps.                                        - Works only for Windows." \
-    "      \n - " + Fore.CYAN + "update all apps" + Fore.RESET + " : updates all of the outdated winget-available apps.                                        - Works only for Windows." \
+    "      \n - " + Fore.CYAN + "update app [target]" + Fore.RESET + " : updates the provided package via winget.                                              - Works only for Windows." \
     "      \n - " + Fore.CYAN + "update all" + Fore.RESET + " : updates (interactively) pip libraries and (non-interactively) winget-available apps.           - Works only for Windows." \
         
     "      \n\n Listing and uninstalling packages:" \

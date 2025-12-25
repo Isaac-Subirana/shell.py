@@ -1,21 +1,30 @@
-internal_libraries = ["help_utility", "random_utility", "install_utility", "update_utility", "uninstall_utility"]
-
 print("Initializing...")
+print("\nImporting some of python's default external libraries...", end = " ")
 
-print("\nImporting some of python's default external libraries...")
+try:   
+    from subprocess import run as subprocess_run
+    from webbrowser import open as open_browser
+    from os import getcwd, chdir, getlogin, makedirs
+    from shutil import rmtree
+    from os.path import exists
+    from time import sleep
+    from sys import stdout
+except:
+    print("CRITICAL ERROR! COULD NOT IMPORT THE NECESSARY PYTHON LIBRARIES!")
+    exit()
 
-from subprocess import run as subprocess_run
-from webbrowser import open as open_browser
-from os import getcwd, chdir, getlogin, remove
-from os.path import exists
-from time import sleep
-from sys import stdout
+print("Done!")
 
-print("Done! I can now run commands, among other things!")
+print("\nUpdating pip...", end = " "), stdout.flush()
+subprocess_run("python -m pip install --upgrade pip -q")
+print("Done!")
 
 print("\nChecking whether colorama is installed, installing it if it isn't..."), stdout.flush()
-subprocess_run("python -m pip install colorama")
-from colorama import Fore
+subprocess_run("python -m pip install colorama -q")
+try:
+    from colorama import Fore
+except:
+    print("Critical error: could not install colorama!")
 print(Fore.GREEN + "\nDone!" + Fore.CYAN +" I can now print in color!" + Fore.RESET)
 
 print(Fore.CYAN + "\nImporting internal libraries..." + Fore.RESET, end=""), stdout.flush()
@@ -27,7 +36,7 @@ try:
     from uninstall_utility import uninstall_utility_main
     print(Fore.GREEN + " Done!")
 except: 
-    print(Fore.RED + " NOT DONE!\nError: internal libraries not found! Please redownload this project from its github project (github.com/Isaac-Subirana/shell.py) which should open in your default browser in 3 seconds.")
+    print(Fore.RED + " NOT DONE!\nError: one or more internal libraries not found! Please redownload this project from its github project (github.com/Isaac-Subirana/shell.py) which should open in your default browser in 3 seconds.")
     sleep(3)
     open_browser("https://github.com/Isaac-Subirana/shell.py")
     input("\n" + Fore.RESET + "-" * 50 + "Press ENTER to exit." + "-" * 50)
@@ -35,7 +44,7 @@ except:
 
 eastereggs = ["rick", "canyouhearme", "max", "maxwell"]
 extra = ["search", "install", "update", "upgrade", "list", "uninstall"]
-basic = ["help", "random", "cd", "system", "isay", "echo"]
+basic = ["help", "random", "cd", "system", "isay", "echo", "mkdir", "delete"]
 shellcommands = basic + extra + eastereggs
 
 command = ""
@@ -62,7 +71,7 @@ def runcommand():
 def isnotexit(command):
     exitaliases = ["exit", "quit", "e", "q"]
     if command.lower() in exitaliases:
-        print("Exit... Done!")
+        print(Fore.CYAN + "Exit... " + Fore.GREEN + "Done!" + Fore.RESET)
         exit()
  
 def runshellcommand(command):
@@ -91,7 +100,35 @@ def runshellcommand(command):
             chdir(cd_to)
             print(getcwd())
         else:
-            print(Fore.RED + "The path you specified does not exist, so I can not 'cd' into it." + Fore.CYAN + "\nDid you want to create a folder? Try 'mkdir'!" + Fore.RESET)
+            print(Fore.RED + "The path you specified does not exist, so I can not 'cd' into it." + Fore.CYAN + 
+                    "\nDid you want to create a folder? Try 'mkdir'!" +
+                    "\nDid you want to delete a folder? Try 'delete'!" + Fore.RESET)
+
+    elif command == "mkdir":
+        print(Fore.RED + "No path specified to create!" + Fore.RESET)
+
+    elif command[:5] == "mkdir":
+        mkdir_to = getcwd() + "/" + command[6:]
+        if not exists(command[6:]) and not exists(mkdir_to):
+            makedirs(command[6:])
+            print(Fore.CYAN + f"Successfully created '{command[6:]}'." + Fore.RESET)
+        else:
+            print(Fore.RED + "The folder/path you want to create already exists!" + Fore.CYAN +
+                    "\nDid you want to move to it? Try 'cd'!" +
+                    "\nDo you want to delete it? Try 'delete'!" + Fore.RESET)
+
+    elif command == "delete":
+        print(Fore.RED + "No path specified to delete!" + Fore.RESET)
+
+    elif command[:6] == "delete":
+        delete_to = getcwd() + "/" + command[7:]
+        if not exists(command[7:]) and not exists(delete_to):
+            print(Fore.RED + "The folder/path you want to delete does not exist!" + Fore.CYAN +
+                    "\nDid you want to create it? Try 'mkdir'!" +
+                    "\nDo you want to move to it? Try 'cd'!" + Fore.RESET)
+        else:
+            rmtree(command[7:])
+            print(Fore.CYAN + f"Successfully deleted '{command[7:]}'." + Fore.RESET)
 
     elif command[:4] == "echo":
         specialfunctions = ["<", ">", "|", "&", "%", '"', "!", "^", "*", "(", ")", "?", "[", "]", ":", "{", "}"]

@@ -2,32 +2,23 @@ from subprocess import run as subprocess_run
 from colorama import Fore
 import sys
 
-def update_pip():
-    print(Fore.CYAN + "\nUpdating pip..." + Fore.RESET, end=" "), sys.stdout.flush()
-    subprocess_run("python -m pip install --upgrade pip -q")
-    print(Fore.GREEN + "Done!" + Fore.RESET)
-
 def update_pip_modules_all():
-    update_pip()
     subprocess_run("python -m pip install --upgrade pip-review -q")
     print(f"\nAvailable updates: (confirm to update)")
     subprocess_run("pip-review -i")
 
 def update_pip_module(target):
-        update_pip()
         print(f"Updating {target}...")
         subprocess_run(f"python -m pip install --upgrade {target}") 
 
 def search_pip_updates():
-    update_pip()
-    print("Searching for updates...\n")
+    print("\nSearching for Python library updates...", end="\r")
     subprocess_run("python -m pip list --outdated")
 
 def update_winget_apps_all():
     subprocess_run("winget upgrade --all --include-unknown")
 
 def update_winget_app(target):
-        print(f"Updating {target}...")
         subprocess_run(f"winget update {target}") 
 
 def search_winget_updates():
